@@ -1,0 +1,160 @@
+/*1*/SELECT ename,job
+FROM emp
+WHERE job='CLERK'
+
+/*2*/SELECT ename,job
+FROM EMP
+WHERE job IN('CLERK','MANAGER')
+
+/*2 SELECT ename,job
+FROM EMP
+WHERE job='CLERK'OR job='MANAGER'*/
+
+/*3*/SELECT CAST (GETDATE()AS DATE);
+
+/*4*/SELECT ENAME,sal
+FROM emp
+WHERE sal BETWEEN '500' AND '1000';
+
+/*5*/SELECT ename, hiredate
+FROM emp 
+WHERE MONTH(hiredate)='12';
+
+
+/*6*/select ename, sal
+from emp
+WHERE sal NOT BETWEEN 1000 AND 2500
+
+/*7*/SELECT ename,sal
+FROM emp
+WHERE sal  IN(800,950,3000,5000)
+
+
+/*8*/SELECT ename
+FROM emp 
+WHERE ename LIKE '_L%';
+
+/*9*/SELECT ename
+FROM emp 
+WHERE ename LIKE '%D'
+
+/*10*/SELECT ename
+FROM emp 
+WHERE ename LIKE '_____'
+
+/*11*/SELECT ename
+FROM emp 
+WHERE ename LIKE 'T%R'
+
+/*12*/SELECT ename
+FROM emp 
+WHERE ename LIKE '%A%'
+
+/*13*/SELECT ename , hiredate,
+datepart(DD,hiredate) AS 'date joined'
+FROM emp
+WHERE datepart(DD,hiredate)<19
+
+
+
+/*14*/SELECT ename ,empno
+FROM emp 
+WHERE ename='James'
+
+/*15*/SELECT ename,sal
+FROM emp 
+WHERE ename='King'
+
+/*16*/SELECT ename,job
+FROM emp 
+WHERE job='president'
+
+/*17*/SELECT *
+FROM emp 
+WHERE job='manager'
+
+
+/*18*/SELECT *
+FROM emp 
+WHERE comm IS NOT NULL
+
+/*19*/SELECT *
+FROM emp 
+WHERE hiredate<('1-apr-81')
+
+
+/*20,21*/SELECT ename ,sal
+FROM emp 
+WHERE ename IN('king','blake','ford','smith')
+
+/*22*/SELECT *
+FROM EMP
+WHERE sal<3500
+
+
+/*23*/SELECT ename , job
+FROM EMP
+WHERE job ='clerk'
+  
+  /*24*/SELECT ename ,job,sal*12 as 'annual'
+FROM EMP
+
+ /*25*/SELECT ename ,sal, sal*12*0.2 
+FROM EMP
+WHERE ename='Ford'
+
+ /*26*/SELECT E.DEPTNO,D.DNAME , SUM(SAL) AS 'TOTAL SALARY' 
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO
+GROUP BY E.DEPTNO;
+
+ /*27*/SELECT ename, MIN(SAL) AS 'LOWEST SALARY'
+FROM EMP
+WHERE DEPTNO=10;
+GROUP BY ename
+
+
+
+ /*28*/SELECT ename ,AVG(sal)as averagesalary
+FROM EMP
+WHERE job='Manager'
+GROUP BY ename
+
+/*29*/SELECT ename ,SUM(sal) as 'total salary'
+FROM EMP
+WHERE job='SALESMAN'
+GROUP BY ename
+
+/*30*/ SELECT DEPTNO, AVG(SAL) AS 'AVG SAL'
+FROM EMP
+GROUP BY DEPTNO
+HAVING AVG(SAL)<(SELECT AVG(SAL) FROM EMP)
+
+
+/*31*/SELECT deptno, count (*)as empcount
+from emp
+GROUP BY deptno
+         
+
+/*32*/SELECT ENAME , SAL, DEPTNO
+FROM EMP
+WHERE SAL IN 
+       (SELECT MAX(SAL) AS 'HIGHEST SAL'
+	    FROM EMP
+		WHERE JOB LIKE 'ANALYST'
+		);
+
+
+/*33*/SELECT ENAME , MAX(COMM) AS 'HIGHEST  COMMISSION'
+FROM EMP
+WHERE comm IS NOT NULL
+GROUP BY ename
+ 
+
+ 
+/*34*/SELECT COUNT(DEPTNO) AS 'DEPARTNMENT COUNT'
+ FROM DEPT
+
+ /*35*/SELECT ename
+ FROM emp
+ Where ename LIKE '__L%'
